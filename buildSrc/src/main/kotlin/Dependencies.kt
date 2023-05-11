@@ -33,6 +33,8 @@ object Deps {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitKotlinxSerialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofitKotlinxSerializaton}"
+    const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinxSerializaton}"
+    const val sandwich = "com.github.skydoves:sandwich:${Versions.sandwich}"
     const val chucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
     const val chuckerNoOp = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
 

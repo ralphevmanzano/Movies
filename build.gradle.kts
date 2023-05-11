@@ -14,6 +14,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        val kotlinVersion = "1.8.10"
         classpath(Deps.safeArgsGradlePlugin)
+        classpath(kotlin("gradle-plugin", version = kotlinVersion))
+        classpath(kotlin("serialization", version = kotlinVersion))
     }
 }

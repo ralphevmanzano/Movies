@@ -4,7 +4,6 @@ object Versions {
     const val pluginHilt = "2.44"
     const val pluginJvm = "1.8.10"
     const val pluginSerialization = "1.8.10"
-    const val pluginSafeArgs = ""
 
     const val androidXCore = "1.10.0"
     const val appCompat = "1.6.1"
@@ -24,6 +23,9 @@ object Versions {
     const val timber = "5.0.1"
     const val retrofit = "2.9.0"
     const val retrofitKotlinxSerializaton = "1.0.0"
+    const val kotlinxSerializaton = "1.5.0"
+    const val sandwich = "1.3.6"
+
     const val chucker = "3.5.2"
     const val paging = "3.1.1"
 

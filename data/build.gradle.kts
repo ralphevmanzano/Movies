@@ -1,17 +1,18 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    kotlin(Plugins.kapt)
 }
 
 android {
     namespace = "com.ralphevmanzano.movies.data"
-    compileSdk = 33
+    compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        minSdk = 26
-        targetSdk = 33
+        minSdk = Config.minSdkVersion
+        targetSdk = Config.targetSdkVersion
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.androidTestInstrumentation
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -25,20 +26,38 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
+    implementation(project(Modules.domain))
+    implementation(project(Modules.shared))
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(Deps.roomRuntime)
+    implementation(Deps.roomKtx)
+    kapt(Deps.roomCompiler)
+
+    implementation(Deps.sqlcipher)
+    implementation(Deps.sqlite)
+
+    implementation(Deps.hilt)
+    kapt(Deps.hiltCompiler)
+
+    implementation(Deps.retrofit)
+    implementation(Deps.retrofitKotlinxSerialization)
+    implementation(Deps.paging)
+    implementation(Deps.pagingKtx)
+    implementation(Deps.sandwich)
+
+    debugImplementation(Deps.chucker)
+    releaseImplementation(Deps.chuckerNoOp)
+
+    implementation(Deps.coroutines)
+
+    implementation(Deps.kotlinxSerialization)
 }
