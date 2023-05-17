@@ -4,6 +4,7 @@ object Modules {
     const val shared = ":shared"
     const val featureHome = ":features:home"
     const val featureDetails = ":features:details"
-    const val featureFavorites = ":features:favorites"
+    const val featureFavourites = ":features:favourites"
+    const val featureSearch = ":features:search"
     const val testUtils = ":test-utils"
 }

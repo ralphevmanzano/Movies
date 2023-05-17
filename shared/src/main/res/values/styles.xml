@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Movies.Chip.Tab" parent="Widget.Material3.Chip.Filter">
+        <item name="backgroundColor">@color/chip_bg_color_state</item>
+        <item name="strokeColor">@color/chip_stroke_color_state</item>
+        <item name="android:textColor">@color/darkBrown</item>
+        <item name="checkedIcon">@null</item>
+    </style>
+
+    <style name="Movies.TextAppearance" parent="">
+        <item name="android:textColor">@color/darkBrown</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Movies.TextAppearance.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Movies.TextAppearance.Note">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Movies.TextAppearance.Rating">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
+
+    <style name="Movies.TextAppearance.Footer">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+</resources>

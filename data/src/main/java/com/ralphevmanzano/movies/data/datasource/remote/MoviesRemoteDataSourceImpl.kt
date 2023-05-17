@@ -14,8 +14,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class MoviesRemoteDataSourceImpl(
+class MoviesRemoteDataSourceImpl @Inject constructor(
     private val service: MovieService,
     private val dispatcher: CoroutineDispatcher
 ) : MoviesRemoteDataSource {
@@ -27,7 +28,7 @@ class MoviesRemoteDataSourceImpl(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(service, MoviesPagingSource.Type.NOW_PLAYING)
+                MoviesPagingSource(service, Movie.Type.NOW_PLAYING)
             }
         ).flow.flowOn(dispatcher)
     }
@@ -39,7 +40,7 @@ class MoviesRemoteDataSourceImpl(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(service, MoviesPagingSource.Type.POPULAR)
+                MoviesPagingSource(service, Movie.Type.POPULAR)
             }
         ).flow.flowOn(dispatcher)
     }
@@ -51,7 +52,7 @@ class MoviesRemoteDataSourceImpl(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(service, MoviesPagingSource.Type.TOP_RATED)
+                MoviesPagingSource(service, Movie.Type.TOP_RATED)
             }
         ).flow.flowOn(dispatcher)
     }
@@ -63,7 +64,7 @@ class MoviesRemoteDataSourceImpl(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(service, MoviesPagingSource.Type.UPCOMING)
+                MoviesPagingSource(service, Movie.Type.UPCOMING)
             }
         ).flow.flowOn(dispatcher)
     }

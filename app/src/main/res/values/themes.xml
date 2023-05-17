@@ -3,6 +3,17 @@
     <style name="Base.Theme.Movies" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@color/darkBrown</item>
+        <item name="colorPrimaryContainer">@color/lightBlue</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        <item name="colorSecondaryContainer">@color/lightBlue</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.Movies" parent="Base.Theme.Movies" />

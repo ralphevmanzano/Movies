@@ -35,4 +35,14 @@ data class Movie(
     val status: String = "",
     @SerialName("tagline")
     val tagLine: String = ""
-)
+) {
+    enum class Type {
+        NOW_PLAYING,
+        POPULAR,
+        TOP_RATED,
+        UPCOMING
+    }
+
+    val posterUrl: String
+        get() = "https://image.tmdb.org/t/p/original${posterPath}"
+}

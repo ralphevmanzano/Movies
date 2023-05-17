@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MoviesLocalDataSourceImpl(
+class MoviesLocalDataSourceImpl @Inject constructor(
     private val favouritesDao: FavouritesDao,
     private val genresDao: GenresDao,
     private val dispatcher: CoroutineDispatcher

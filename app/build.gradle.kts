@@ -39,6 +39,13 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.shared))
+    implementation(project(Modules.data))
+    implementation(project(Modules.featureHome))
+    implementation(project(Modules.featureDetails))
+    implementation(project(Modules.featureFavourites))
+    implementation(project(Modules.featureSearch))
+
     implementation(Deps.androidxCore)
     implementation(Deps.appCompat)
     implementation(Deps.material)
@@ -51,4 +58,8 @@ dependencies {
     // hilt
     implementation(Deps.hilt)
     kapt(Deps.hiltCompiler)
+
+    // chucker
+    debugImplementation(Deps.chucker)
+    releaseImplementation(Deps.chuckerNoOp)
 }

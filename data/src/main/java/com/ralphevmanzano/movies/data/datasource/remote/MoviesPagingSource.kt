@@ -9,24 +9,17 @@ import com.skydoves.sandwich.messageOrNull
 import retrofit2.HttpException
 import java.io.IOException
 
-class MoviesPagingSource(private val service: MovieService, private val type: Type) :
+class MoviesPagingSource(private val service: MovieService, private val type: Movie.Type) :
     PagingSource<Int, Movie>() {
-
-    enum class Type {
-        NOW_PLAYING,
-        POPULAR,
-        TOP_RATED,
-        UPCOMING
-    }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val pageIndex = params.key ?: 1
         try {
             val response = when (type) {
-                Type.NOW_PLAYING -> service.getNowPlaying(pageIndex)
-                Type.POPULAR -> service.getPopular(pageIndex)
-                Type.TOP_RATED -> service.getTopRated(pageIndex)
-                Type.UPCOMING -> service.getUpcoming(pageIndex)
+                Movie.Type.NOW_PLAYING -> service.getNowPlaying(pageIndex)
+                Movie.Type.POPULAR -> service.getPopular(pageIndex)
+                Movie.Type.TOP_RATED -> service.getTopRated(pageIndex)
+                Movie.Type.UPCOMING -> service.getUpcoming(pageIndex)
             }
 
             return if (response.isSuccess) {

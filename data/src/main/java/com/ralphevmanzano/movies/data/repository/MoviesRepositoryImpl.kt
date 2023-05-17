@@ -4,8 +4,9 @@ import com.ralphevmanzano.movies.domain.datasource.MoviesLocalDataSource
 import com.ralphevmanzano.movies.domain.datasource.MoviesRemoteDataSource
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.domain.repository.MoviesRepository
+import javax.inject.Inject
 
-class MoviesRepositoryImpl(
+class MoviesRepositoryImpl @Inject constructor(
     private val local: MoviesLocalDataSource,
     private val remote: MoviesRemoteDataSource
 ) : MoviesRepository {
