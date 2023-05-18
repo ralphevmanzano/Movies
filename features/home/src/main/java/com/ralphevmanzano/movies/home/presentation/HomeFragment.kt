@@ -57,11 +57,11 @@ class HomeFragment: Fragment() {
         adapter.addFragment(MovieListFragment.create(Movie.Type.UPCOMING))
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         viewPager.adapter = adapter
-
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+
             override fun onPageSelected(position: Int) {
                 val chipList = listOf(nowPlayingChip, popularChip, topRatedChip, upcomingChip)
-                chipList[position].isSelected = true
+                chipList[position].isChecked = true
             }
         })
     }

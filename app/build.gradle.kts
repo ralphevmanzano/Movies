@@ -62,4 +62,6 @@ dependencies {
     // chucker
     debugImplementation(Deps.chucker)
     releaseImplementation(Deps.chuckerNoOp)
+
+    implementation(Deps.timber)
 }

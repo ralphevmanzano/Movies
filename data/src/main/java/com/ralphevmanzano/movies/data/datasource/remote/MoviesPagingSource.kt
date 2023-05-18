@@ -13,28 +13,22 @@ class MoviesPagingSource(private val service: MovieService, private val type: Mo
     PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
-        val pageIndex = params.key ?: 1
-        try {
+        val pageIndex = params.key ?: STARTING_PAGE_INDEX
+        return try {
             val response = when (type) {
                 Movie.Type.NOW_PLAYING -> service.getNowPlaying(pageIndex)
                 Movie.Type.POPULAR -> service.getPopular(pageIndex)
                 Movie.Type.TOP_RATED -> service.getTopRated(pageIndex)
                 Movie.Type.UPCOMING -> service.getUpcoming(pageIndex)
             }
+            val movies = response.getOrThrow().results
+            val nextKey = if (movies.isEmpty()) { null } else { pageIndex + 1 }
 
-            return if (response.isSuccess) {
-                val movies = response.getOrThrow().results
-                val nextKey = if (movies.isEmpty()) {
-                    null
-                } else {
-                    // By default, initial load size = 3 * NETWORK PAGE SIZE
-                    // ensure we're not requesting duplicating items at the 2nd request
-                    pageIndex + (params.loadSize / NETWORK_PAGE_SIZE)
-                }
-                LoadResult.Page(data = movies ?: emptyList(), prevKey = null, nextKey = nextKey)
-            } else {
-                LoadResult.Error(Throwable(response.messageOrNull))
-            }
+            LoadResult.Page(
+                data = movies,
+                prevKey = if (pageIndex == 1) null else pageIndex,
+                nextKey = nextKey
+            )
         } catch (e: IOException) {
             return LoadResult.Error(e)
         } catch (e: HttpException) {
@@ -43,9 +37,6 @@ class MoviesPagingSource(private val service: MovieService, private val type: Mo
     }
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
-        // We need to get the previous key (or next key if previous is null) of the page
-        // that was closest to the most recently accessed index.
-        // Anchor position is the most recently accessed index.
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
@@ -53,6 +44,7 @@ class MoviesPagingSource(private val service: MovieService, private val type: Mo
     }
 
     companion object {
-        const val NETWORK_PAGE_SIZE = 25
+        const val NETWORK_PAGE_SIZE = 20
+        private const val STARTING_PAGE_INDEX = 1
     }
 }

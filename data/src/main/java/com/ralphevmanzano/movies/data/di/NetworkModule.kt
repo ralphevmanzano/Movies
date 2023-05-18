@@ -24,7 +24,7 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(
+            .addNetworkInterceptor(
                 ChuckerInterceptor.Builder(context)
                     .collector(ChuckerCollector(context))
                     .maxContentLength(250000L)
@@ -38,10 +38,14 @@ class NetworkModule {
 
     @Provides
     fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit.Builder {
+        val json = Json {
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
-            .addConverterFactory(Json.asConverterFactory(contentType))
+            .addConverterFactory(json.asConverterFactory(contentType))
             .client(okHttpClient)
     }
 

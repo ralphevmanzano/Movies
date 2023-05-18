@@ -1,37 +1,58 @@
 package com.ralphevmanzano.movies.home.presentation.holder
 
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.bold
+import androidx.core.text.scale
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
+import com.ralphevmanzano.movies.home.R
 import com.ralphevmanzano.movies.home.databinding.ItemMovieListBinding
 
 class MovieListHolder private constructor(
     private val binding: ItemMovieListBinding,
+    private val glide: RequestManager,
+    private val genres: List<Genre>,
     private val onItemClick: (Movie) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(movie: Movie) = with(binding) {
         val context = binding.root.context
-        titleTextView.text = movie.title
-        dateTextView.text = movie.releaseDate
-        // TODO: handle genre, create splash call API (if DB empty) store in DB
-        // TODO: get genre and put in variable, access variable when mapping movies
-        Glide.with(context).load(movie.posterUrl).into(posterImageView)
-        val progress = movie.voteAverage * 10
-        ratingProgress.progress = progress.toInt()
-        ratingTextView.text = progress.toString()
-        votesTextView.text = "(${movie.voteCount} votes)"
+        val genreText = genres.filter { it.id in movie.genreIds }.take(3).joinToString { it.name }
+        val spannableTitle = SpannableStringBuilder()
+            .bold { append(movie.title) }
+            .append(" ")
+            .scale(0.9f) { append(context.getString(R.string.release_year, movie.releaseYear)) }
+
+        titleTextView.text = spannableTitle
+        genreTextView.text = genreText
+        glide.load(movie.posterUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(posterImageView)
+        ratingTextView.text = movie.voteAverage.toString()
+        votesTextView.text = context.getString(R.string.votes, movie.voteCount)
 
         itemView.setOnClickListener { onItemClick(movie) }
     }
 
     companion object {
-        fun create(parent: ViewGroup, onItemClick: (Movie) -> Unit): MovieListHolder {
+        fun create(
+            parent: ViewGroup,
+            glide: RequestManager,
+            genres: List<Genre>,
+            onItemClick: (Movie) -> Unit
+        ): MovieListHolder {
             val binding =
                 ItemMovieListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return MovieListHolder(binding, onItemClick)
+            return MovieListHolder(binding, glide, genres, onItemClick)
         }
     }
 }

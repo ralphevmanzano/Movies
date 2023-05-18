@@ -48,7 +48,7 @@ class MoviesLocalDataSourceImpl @Inject constructor(
         genresDao.addGenres(genres.map { GenreEntity(it.id, it.name) })
     }
 
-    override suspend fun getGenresByIds(ids: List<Int>) {
-        genresDao.getGenresFromIds(ids)
+    override suspend fun loadGenres(): List<Genre> {
+        return genresDao.getGenres().map { Genre(it.id, it.name) }
     }
 }

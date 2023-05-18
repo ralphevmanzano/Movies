@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.home.databinding.FragmentMovieListBinding
 import com.ralphevmanzano.movies.home.presentation.adapter.MovieListAdapter
@@ -35,21 +38,35 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initUI()
-        collectUIState()
+        setupUI()
+        setupObservers()
     }
 
-    private fun initUI() = with(binding) {
-        adapter = MovieListAdapter {}
+    private fun setupUI() = with(binding) {
+    }
+
+    private fun setupObservers() {
+        viewModel.genres.observe(viewLifecycleOwner) { genres ->
+            if (genres.isNotEmpty()) {
+                setupRecyclerView(genres)
+            }
+        }
+    }
+
+    private fun setupRecyclerView(genres: List<Genre>) {
+        val glide = Glide.with(this)
+        adapter = MovieListAdapter(glide, genres) {}
         adapter.withLoadStateHeaderAndFooter(
             header = MovieListLoadingStateAdapter(adapter),
             footer = MovieListLoadingStateAdapter(adapter)
         )
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.adapter = adapter
 
+        loadMovieList()
     }
 
-    private fun collectUIState() {
+    private fun loadMovieList() {
         viewLifecycleOwner.lifecycleScope.launch {
             when (type) {
                 Movie.Type.NOW_PLAYING -> {

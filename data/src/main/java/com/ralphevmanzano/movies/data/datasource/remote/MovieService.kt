@@ -1,5 +1,6 @@
 package com.ralphevmanzano.movies.data.datasource.remote
 
+import com.ralphevmanzano.movies.data.datasource.remote.model.GetGenresResponse
 import com.ralphevmanzano.movies.data.datasource.remote.model.GetMoviesResponse
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.skydoves.sandwich.ApiResponse
@@ -23,4 +24,7 @@ interface MovieService {
 
     @GET("movie/{id}")
     suspend fun getMovieDetails(@Path("id") id: Int): ApiResponse<Movie>
+
+    @GET("genre/movie/list")
+    suspend fun getGenres(): ApiResponse<GetGenresResponse>
 }

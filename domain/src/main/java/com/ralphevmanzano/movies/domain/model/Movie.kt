@@ -2,6 +2,9 @@ package com.ralphevmanzano.movies.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import timber.log.Timber
+import java.time.LocalDate
+import java.time.format.DateTimeParseException
 
 @Serializable
 data class Movie(
@@ -44,5 +47,16 @@ data class Movie(
     }
 
     val posterUrl: String
-        get() = "https://image.tmdb.org/t/p/original${posterPath}"
+        get() = "https://image.tmdb.org/t/p/w500${posterPath}"
+
+    val releaseYear: String
+        get() {
+            return try {
+                val localDate = LocalDate.parse(releaseDate)
+                localDate.year.toString()
+            } catch (e: DateTimeParseException) {
+                Timber.e(e)
+                ""
+            }
+        }
 }

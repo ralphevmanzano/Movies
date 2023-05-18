@@ -2,8 +2,14 @@ package com.ralphevmanzano.movies.data.repository
 
 import com.ralphevmanzano.movies.domain.datasource.MoviesLocalDataSource
 import com.ralphevmanzano.movies.domain.datasource.MoviesRemoteDataSource
+import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
+import com.ralphevmanzano.movies.domain.model.utils.Result
 import com.ralphevmanzano.movies.domain.repository.MoviesRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(
@@ -20,6 +26,25 @@ class MoviesRepositoryImpl @Inject constructor(
     override fun getUpcoming() = remote.getUpcoming()
 
     override fun getDetails(id: Int) = remote.getDetails(id)
+    override fun getGenres(): Flow<Result<Boolean>> {
+        return flow {
+            val localGenres = local.loadGenres()
+            if (localGenres.isNotEmpty()) {
+                emit(Result.success(true))
+                return@flow
+            }
+            remote.getGenres().onEach { result ->
+                if (result.status == Result.Status.SUCCESS) {
+                    result.data?.let {
+                        local.addGenres(it)
+                        emit(Result.success(true))
+                        return@onEach
+                    }
+                }
+                emit(Result.error(result.message.orEmpty(), null, null))
+            }.collect()
+        }
+    }
 
     override fun loadFavourites() = local.loadFavourites()
 
@@ -29,5 +54,9 @@ class MoviesRepositoryImpl @Inject constructor(
 
     override suspend fun removeFavourite(id: Int) {
         local.removeFavourite(id)
+    }
+
+    override suspend fun loadGenres(): List<Genre> {
+        return local.loadGenres()
     }
 }

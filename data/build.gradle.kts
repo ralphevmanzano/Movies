@@ -59,6 +59,6 @@ dependencies {
     releaseImplementation(Deps.chuckerNoOp)
 
     implementation(Deps.coroutines)
-
     implementation(Deps.kotlinxSerialization)
+    implementation(Deps.timber)
 }

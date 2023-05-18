@@ -9,6 +9,6 @@ interface MoviesLocalDataSource {
     suspend fun addFavourite(movie: Movie)
     suspend fun removeFavourite(id: Int)
 
+    suspend fun loadGenres(): List<Genre>
     suspend fun addGenres(genres: List<Genre>)
-    suspend fun getGenresByIds(ids: List<Int>)
 }

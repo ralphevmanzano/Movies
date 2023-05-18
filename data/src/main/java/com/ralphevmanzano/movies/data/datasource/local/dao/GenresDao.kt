@@ -12,6 +12,6 @@ interface GenresDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addGenres(genres: List<GenreEntity>)
 
-    @Query("SELECT * FROM genres WHERE id IN (:ids)")
-    suspend fun getGenresFromIds(ids: List<Int>): List<GenreEntity>
+    @Query("SELECT * FROM genres")
+    suspend fun getGenres(): List<GenreEntity>
 }

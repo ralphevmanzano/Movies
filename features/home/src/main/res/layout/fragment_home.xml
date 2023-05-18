@@ -5,55 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:singleLine="true">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/nowPlayingChip"
-            style="@style/Movies.Chip.Tab"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Now Playing"
-            app:checkedIcon="@null" />
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="4dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/popularChip"
-            style="@style/Movies.Chip.Tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Popular"
-            app:checkedIcon="@null" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/nowPlayingChip"
+                style="@style/Movies.Chip.Tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Now Playing"
+                app:checkedIcon="@null" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/topRatedChip"
-            style="@style/Movies.Chip.Tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Top Rated"
-            app:checkedIcon="@null" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/popularChip"
+                style="@style/Movies.Chip.Tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular"
+                app:checkedIcon="@null" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/upcomingChip"
-            style="@style/Movies.Chip.Tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming"
-            app:checkedIcon="@null" />
-    </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/topRatedChip"
+                style="@style/Movies.Chip.Tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top Rated"
+                app:checkedIcon="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/upcomingChip"
+                style="@style/Movies.Chip.Tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming"
+                app:checkedIcon="@null" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/chipGroup"
-        app:layout_constraintStart_toStartOf="@id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@id/chipGroup" />
+        app:layout_constraintEnd_toEndOf="@id/scrollView"
+        app:layout_constraintStart_toStartOf="@id/scrollView"
+        app:layout_constraintTop_toBottomOf="@id/scrollView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

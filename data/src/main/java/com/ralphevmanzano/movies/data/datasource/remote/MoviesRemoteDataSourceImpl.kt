@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.ralphevmanzano.movies.domain.datasource.MoviesRemoteDataSource
+import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.domain.model.utils.Result
 import com.skydoves.sandwich.message
@@ -14,6 +15,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 class MoviesRemoteDataSourceImpl @Inject constructor(
@@ -25,7 +27,8 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 2
             ),
             pagingSourceFactory = {
                 MoviesPagingSource(service, Movie.Type.NOW_PLAYING)
@@ -37,7 +40,8 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 2
             ),
             pagingSourceFactory = {
                 MoviesPagingSource(service, Movie.Type.POPULAR)
@@ -49,7 +53,8 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 2
             ),
             pagingSourceFactory = {
                 MoviesPagingSource(service, Movie.Type.TOP_RATED)
@@ -61,7 +66,8 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 2
             ),
             pagingSourceFactory = {
                 MoviesPagingSource(service, Movie.Type.UPCOMING)
@@ -76,8 +82,25 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
                 emit(Result.success(data))
             }.suspendOnError {
                 emit(Result.error(message()))
+                Timber.e(message())
             }.suspendOnException {
                 emit(Result.error(message()))
+                Timber.e(message())
+            }
+        }.flowOn(dispatcher)
+    }
+
+    override fun getGenres(): Flow<Result<List<Genre>>> {
+        return flow<Result<List<Genre>>> {
+            emit(Result.loading())
+            service.getGenres().suspendOnSuccess {
+                emit(Result.success(data.genres))
+            }.suspendOnError {
+                emit(Result.error(message()))
+                Timber.e(message())
+            }.suspendOnException {
+                emit(Result.error(message()))
+                Timber.e(message())
             }
         }.flowOn(dispatcher)
     }
