@@ -1,23 +1,17 @@
 package com.ralphevmanzano.movies.home.presentation.holder
 
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
-import android.text.style.AbsoluteSizeSpan
-import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.bold
 import androidx.core.text.scale
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
-import com.ralphevmanzano.movies.home.R
 import com.ralphevmanzano.movies.home.databinding.ItemMovieListBinding
+import com.ralphevmanzano.movies.shared.R
 
 class MovieListHolder private constructor(
     private val binding: ItemMovieListBinding,
@@ -32,7 +26,7 @@ class MovieListHolder private constructor(
         val spannableTitle = SpannableStringBuilder()
             .bold { append(movie.title) }
             .append(" ")
-            .scale(0.9f) { append(context.getString(R.string.release_year, movie.releaseYear)) }
+            .scale(0.9f) { append(context.getString(com.ralphevmanzano.movies.shared.R.string.release_year, movie.releaseYear)) }
 
         titleTextView.text = spannableTitle
         genreTextView.text = genreText

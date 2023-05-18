@@ -38,6 +38,10 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.shared))
+    implementation(project(Modules.data))
+    implementation(project(Modules.domain))
+
     implementation(Deps.androidxCore)
     implementation(Deps.appCompat)
     implementation(Deps.material)
@@ -50,4 +54,7 @@ dependencies {
     // hilt
     implementation(Deps.hilt)
     kapt(Deps.hiltCompiler)
+
+    implementation(Deps.glide)
+    kapt(Deps.glideProcessor)
 }

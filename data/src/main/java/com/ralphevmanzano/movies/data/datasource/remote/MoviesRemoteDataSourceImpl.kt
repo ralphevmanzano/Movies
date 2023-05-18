@@ -76,7 +76,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
     }
 
     override fun getDetails(id: Int): Flow<Result<Movie>> {
-        return flow<Result<Movie>> {
+        return flow {
             emit(Result.loading())
             service.getMovieDetails(id).suspendOnSuccess {
                 emit(Result.success(data))
@@ -91,7 +91,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
     }
 
     override fun getGenres(): Flow<Result<List<Genre>>> {
-        return flow<Result<List<Genre>>> {
+        return flow {
             emit(Result.loading())
             service.getGenres().suspendOnSuccess {
                 emit(Result.success(data.genres))

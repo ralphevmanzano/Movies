@@ -8,4 +8,5 @@
     <color name="lightGray">#1F616971</color>
     <color name="gray">#99616971</color>
     <color name="yellow">#FFC107</color>
+    <color name="transparent_white">#52FFFFFF</color>
 </resources>

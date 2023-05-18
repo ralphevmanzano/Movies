@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_search"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/fragment_favourites">
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/fragment_favourites"
         android:name="com.ralphevmanzano.movies.favourites.presentation.FavouritesFragment"
-        android:label="SearchFragment" />
+        android:label="FavouritesFragment" />
 </navigation>

@@ -1,7 +1,6 @@
-package com.ralphevmanzano.movies
+package com.ralphevmanzano.movies.presentation
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -10,7 +9,14 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.isVisible
+import com.ralphevmanzano.movies.R
 import com.ralphevmanzano.movies.databinding.ActivityMainBinding
+import com.ralphevmanzano.movies.databinding.ContentMainBinding
+import com.ralphevmanzano.movies.details.R.id.*
+import com.ralphevmanzano.movies.search.R.id.*
+import com.ralphevmanzano.movies.shared.utils.hide
+import com.ralphevmanzano.movies.shared.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,18 +37,27 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                fragment_details, fragment_search -> {
+                    binding.content.bottomNavView.hide()
+                    binding.toolbar.hide()
+                }
+                else -> {
+                    binding.content.bottomNavView.show()
+                    binding.toolbar.show()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_search -> true
             else -> super.onOptionsItemSelected(item)

@@ -5,9 +5,21 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
 
+    <action
+        android:id="@+id/action_to_details"
+        app:destination="@+id/navigation_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </action>
+
+    <action
+        android:id="@+id/action_to_search"
+        app:destination="@+id/navigation_search" />
+
     <include app:graph="@navigation/navigation_home" />
-    <include app:graph="@navigation/navigation_details"/>
-    <include app:graph="@navigation/navigation_favourites"/>
-    <include app:graph="@navigation/navigation_search"/>
+    <include app:graph="@navigation/navigation_details" />
+    <include app:graph="@navigation/navigation_favourites" />
+    <include app:graph="@navigation/navigation_search" />
 
 </navigation>

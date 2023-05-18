@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.domain))
     implementation(Deps.androidxCore)
     implementation(Deps.appCompat)
     implementation(Deps.material)

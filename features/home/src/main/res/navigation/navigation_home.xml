@@ -2,9 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_home"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/fragment_home">
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/fragment_home"
         android:name="com.ralphevmanzano.movies.home.presentation.HomeFragment"
         android:label="HomeFragment" />
 </navigation>

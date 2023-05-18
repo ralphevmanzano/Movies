@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.shared))
     implementation(Deps.kotlinxSerialization)
     implementation(Deps.paging)
     implementation(Deps.timber)

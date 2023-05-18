@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_details"
-    app:startDestination="@id/detailsFragment">
+    app:startDestination="@id/fragment_details">
 
     <fragment
-        android:id="@+id/detailsFragment"
+        android:id="@+id/fragment_details"
         android:name="com.ralphevmanzano.movie.details.presentation.DetailsFragment"
         android:label="DetailsFragment" />
 </navigation>

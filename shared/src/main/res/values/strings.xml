@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="release_year">(%s)</string>
+    <string name="votes">(%,d)</string>
+    <string name="votes_with_label">(%,d votes)</string>
+</resources>

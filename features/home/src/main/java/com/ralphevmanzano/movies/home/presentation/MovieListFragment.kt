@@ -12,11 +12,13 @@ import com.bumptech.glide.Glide
 import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.home.databinding.FragmentMovieListBinding
+import com.ralphevmanzano.movies.home.navigation.HomeNavigation
 import com.ralphevmanzano.movies.home.presentation.adapter.MovieListAdapter
 import com.ralphevmanzano.movies.home.presentation.adapter.MovieListLoadingStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
@@ -26,6 +28,9 @@ class MovieListFragment : Fragment() {
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var adapter: MovieListAdapter
     private lateinit var type: Movie.Type
+
+    @Inject
+    lateinit var homeNavigation: HomeNavigation
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +60,9 @@ class MovieListFragment : Fragment() {
 
     private fun setupRecyclerView(genres: List<Genre>) {
         val glide = Glide.with(this)
-        adapter = MovieListAdapter(glide, genres) {}
+        adapter = MovieListAdapter(glide, genres) {
+            homeNavigation.navigateToDetails(it.id)
+        }
         adapter.withLoadStateHeaderAndFooter(
             header = MovieListLoadingStateAdapter(adapter),
             footer = MovieListLoadingStateAdapter(adapter)

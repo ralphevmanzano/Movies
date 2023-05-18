@@ -14,6 +14,8 @@ data class Movie(
     val backdropPath: String = "",
     @SerialName("genre_ids")
     val genreIds: List<Int> = emptyList(),
+    @SerialName("genres")
+    val genres: List<Genre> = emptyList(),
     @SerialName("id")
     val id: Int = 0,
     @SerialName("overview")
@@ -48,6 +50,9 @@ data class Movie(
 
     val posterUrl: String
         get() = "https://image.tmdb.org/t/p/w500${posterPath}"
+
+    val backdropUrl: String
+        get() = "https://image.tmdb.org/t/p/w500${backdropPath}"
 
     val releaseYear: String
         get() {
