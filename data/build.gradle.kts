@@ -1,3 +1,7 @@
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinAndroid)
@@ -15,6 +19,14 @@ android {
 
         testInstrumentationRunner = Config.androidTestInstrumentation
         consumerProguardFiles("consumer-rules.pro")
+
+        val apiProperties = Properties().apply {
+            load(FileInputStream(File(rootProject.rootDir, "api.properties")))
+        }
+
+        buildConfigField("String", "DB_PASSPHRASE", "\"${apiProperties.getProperty("DB_PASSPHRASE")}\"")
+        buildConfigField("String", "TMDB_API_KEY", "\"${apiProperties.getProperty("TMDB_API_KEY")}\"")
+        buildConfigField("String", "BASE_URL", "\"${apiProperties.getProperty("BASE_URL")}\"")
     }
 
     buildTypes {
@@ -32,6 +44,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

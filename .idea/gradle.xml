@@ -20,7 +20,6 @@
             <option value="$PROJECT_DIR$/features/home" />
             <option value="$PROJECT_DIR$/features/search" />
             <option value="$PROJECT_DIR$/shared" />
-            <option value="$PROJECT_DIR$/test-utils" />
           </set>
         </option>
       </GradleProjectSettings>

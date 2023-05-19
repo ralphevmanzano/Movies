@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.ralphevmanzano.movies.domain.model.Genre
@@ -14,7 +16,8 @@ import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.home.databinding.FragmentMovieListBinding
 import com.ralphevmanzano.movies.home.navigation.HomeNavigation
 import com.ralphevmanzano.movies.shared.utils.adapter.MovieListAdapter
-import com.ralphevmanzano.movies.shared.utils.adapter.MovieListLoadingStateAdapter
+import com.ralphevmanzano.movies.shared.utils.hide
+import com.ralphevmanzano.movies.shared.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -59,10 +62,23 @@ class MovieListFragment : Fragment() {
         adapter = MovieListAdapter(glide, genres) {
             homeNavigation.navigateToDetails(it.id)
         }
-        adapter.withLoadStateHeaderAndFooter(
-            header = MovieListLoadingStateAdapter(adapter),
-            footer = MovieListLoadingStateAdapter(adapter)
-        )
+
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading && adapter.itemCount == 0) {
+                binding.progressBar.show()
+            } else {
+                binding.progressBar.hide()
+            }
+
+            if (loadState.refresh is LoadState.Error) {
+                Toast.makeText(
+                    requireContext(),
+                    (loadState.refresh as LoadState.Error).error.localizedMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.adapter = adapter
 

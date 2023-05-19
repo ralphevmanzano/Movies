@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Now Playing"
+                android:text="@string/now_playing"
                 app:checkedIcon="@null" />
 
             <com.google.android.material.chip.Chip
@@ -39,7 +39,7 @@
                 style="@style/Movies.Chip.Tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popular"
+                android:text="@string/popular"
                 app:checkedIcon="@null" />
 
             <com.google.android.material.chip.Chip
@@ -47,7 +47,7 @@
                 style="@style/Movies.Chip.Tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top Rated"
+                android:text="@string/top_rated"
                 app:checkedIcon="@null" />
 
             <com.google.android.material.chip.Chip
@@ -55,7 +55,7 @@
                 style="@style/Movies.Chip.Tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upcoming"
+                android:text="@string/upcoming"
                 app:checkedIcon="@null" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

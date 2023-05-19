@@ -6,5 +6,4 @@ object Modules {
     const val featureDetails = ":features:details"
     const val featureFavourites = ":features:favourites"
     const val featureSearch = ":features:search"
-    const val testUtils = ":test-utils"
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,8 +18,8 @@ import com.ralphevmanzano.movies.search.databinding.FragmentSearchBinding
 import com.ralphevmanzano.movies.search.navigation.SearchNavigation
 import com.ralphevmanzano.movies.shared.utils.adapter.MovieListAdapter
 import com.ralphevmanzano.movies.shared.utils.hide
-import com.ralphevmanzano.movies.shared.utils.invisible
 import com.ralphevmanzano.movies.shared.utils.show
+import com.ralphevmanzano.movies.shared.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -55,6 +56,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupUI() = with(binding) {
+        searchEditText.showKeyboard()
         searchEditText.doAfterTextChanged { query ->
             if (query.isNullOrBlank()) {
                 progressBar.hide()
@@ -116,6 +118,14 @@ class SearchFragment : Fragment() {
                     noResultsTextView.hide()
                     recyclerView.show()
                 }
+            }
+
+            if (loadState.refresh is LoadState.Error) {
+                Toast.makeText(
+                    requireContext(),
+                    (loadState.refresh as LoadState.Error).error.localizedMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

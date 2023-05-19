@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favourites_empty">Your favourite list is empty,\nstart adding now!</string>
+</resources>

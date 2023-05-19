@@ -68,7 +68,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="32dp">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -292,8 +294,8 @@
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/contentGroup"
                 android:layout_width="wrap_content"
-                android:visibility="invisible"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 app:constraint_referenced_ids="overViewSpacer,tagLineTextView,posterImageView,userScoreLabel,runtimeTextView,releaseDateTextView,languageTextView,statusLabelTextView,statusTextView,overViewLabelTextView,overViewTextView,ratingLayout,chipGroup,languageLabelTextView,titleTextView,languageSpacer" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

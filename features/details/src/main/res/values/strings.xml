@@ -6,4 +6,6 @@
     <string name="status">Status</string>
     <string name="rating_total">/10</string>
     <string name="user_score">User Score</string>
+    <string name="movie_added_to_favourites">Movie added to favourites!</string>
+    <string name="movie_removed_from_favourites">Movie removed from favourites!</string>
 </resources>
