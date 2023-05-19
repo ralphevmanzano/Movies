@@ -1,10 +1,10 @@
 # Movies
 A simple app using TMDB Api while showcasing modern Android development technologies.
 <p align="center">
-  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/b149dbc9-1677-45c7-a33e-e2addc75443b" width="220" />
-  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/d365b253-04a3-4474-8e88-48ad7a1cb9b3" width="220" /> 
-  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/cf6f8d1b-1922-4a36-b436-f52d50e5292f" width="220" /> 
-  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/92d1f86f-9436-463e-ad7c-ad6859385f02" width="220" /> 
+  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/b149dbc9-1677-45c7-a33e-e2addc75443b" width="200" />
+  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/d365b253-04a3-4474-8e88-48ad7a1cb9b3" width="200" /> 
+  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/cf6f8d1b-1922-4a36-b436-f52d50e5292f" width="200" /> 
+  <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/92d1f86f-9436-463e-ad7c-ad6859385f02" width="200" /> 
 </p>
 
 ## Development setup
