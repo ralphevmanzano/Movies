@@ -8,4 +8,5 @@
         android:id="@+id/fragment_search"
         android:name="com.ralphevmanzano.movies.search.presentation.SearchFragment"
         android:label="SearchFragment" />
+
 </navigation>

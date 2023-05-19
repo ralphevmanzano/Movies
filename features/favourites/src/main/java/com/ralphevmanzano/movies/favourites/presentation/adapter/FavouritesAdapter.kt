@@ -25,6 +25,6 @@ class FavouritesAdapter(
 
     override fun onBindViewHolder(holder: MovieListHolder, position: Int) {
         val data = getItem(holder.bindingAdapterPosition)
-        data?.let { holder.bind(it) }
+        data?.let { holder.bind(Pair(it, 0)) }
     }
 }

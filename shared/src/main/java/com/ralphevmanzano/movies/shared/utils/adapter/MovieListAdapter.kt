@@ -11,12 +11,13 @@ import com.ralphevmanzano.movies.shared.utils.holder.MovieListHolder
 class MovieListAdapter(
     private val glide: RequestManager,
     private val genres: List<Genre>,
+    private val onBindItem: ((Int) -> Unit)? = null,
     private val onItemClick: (Movie) -> Unit
-) : PagingDataAdapter<Movie, MovieListHolder>(MovieDiffCallBack()) {
+) : PagingDataAdapter<Pair<Movie, Int>, MovieListHolder>(MovieDiffCallBack()) {
 
-    class MovieDiffCallBack : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem == newItem
+    class MovieDiffCallBack : DiffUtil.ItemCallback<Pair<Movie, Int>>() {
+        override fun areItemsTheSame(oldItem: Pair<Movie, Int>, newItem: Pair<Movie, Int>) = oldItem.first.id == newItem.first.id
+        override fun areContentsTheSame(oldItem: Pair<Movie, Int>, newItem: Pair<Movie, Int>) = oldItem.first == newItem.first
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListHolder {
@@ -25,6 +26,9 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: MovieListHolder, position: Int) {
         val data = getItem(holder.bindingAdapterPosition)
-        data?.let { holder.bind(it) }
+        data?.let {
+            onBindItem?.invoke(it.first.totalResults)
+            holder.bind(it)
+        }
     }
 }

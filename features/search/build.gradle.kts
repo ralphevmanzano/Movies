@@ -59,4 +59,7 @@ dependencies {
     // paging
     implementation(Deps.paging)
     implementation(Deps.pagingKtx)
+
+    implementation(Deps.glide)
+    kapt(Deps.glideProcessor)
 }

@@ -4,20 +4,16 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.skydoves.sandwich.getOrThrow
-import com.skydoves.sandwich.isSuccess
-import com.skydoves.sandwich.messageOrNull
-import retrofit2.HttpException
-import java.io.IOException
 
 class MoviesPagingSource(
     private val service: MovieService,
     private val type: Movie.Type?,
     private val query: String = ""
-) :
-    PagingSource<Int, Movie>() {
+) : PagingSource<Int, Pair<Movie, Int>>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pair<Movie, Int>> {
         val pageIndex = params.key ?: STARTING_PAGE_INDEX
+
         return try {
             val response = when (type) {
                 Movie.Type.NOW_PLAYING -> service.getNowPlaying(pageIndex)
@@ -27,6 +23,10 @@ class MoviesPagingSource(
                 else -> service.searchMovies(query, pageIndex)
             }
             val movies = response.getOrThrow().results
+            val results = response.getOrThrow().totalResults
+            movies.forEach {
+                it.totalResults = results
+            }
             val nextKey = if (movies.isEmpty()) {
                 null
             } else {
@@ -34,18 +34,16 @@ class MoviesPagingSource(
             }
 
             LoadResult.Page(
-                data = movies,
+                data = movies.map { Pair(it, results) },
                 prevKey = if (pageIndex == 1) null else pageIndex,
                 nextKey = nextKey
             )
-        } catch (e: IOException) {
-            return LoadResult.Error(e)
-        } catch (e: HttpException) {
+        } catch (e: Exception) {
             return LoadResult.Error(e)
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Pair<Movie, Int>>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

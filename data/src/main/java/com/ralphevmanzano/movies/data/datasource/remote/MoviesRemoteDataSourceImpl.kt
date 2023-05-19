@@ -23,7 +23,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
     private val dispatcher: CoroutineDispatcher
 ) : MoviesRemoteDataSource {
 
-    override fun getNowPlaying(): Flow<PagingData<Movie>> {
+    override fun getNowPlaying(): Flow<PagingData<Pair<Movie, Int>>> {
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
@@ -36,7 +36,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         ).flow.flowOn(dispatcher)
     }
 
-    override fun getPopular(): Flow<PagingData<Movie>> {
+    override fun getPopular(): Flow<PagingData<Pair<Movie, Int>>> {
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
@@ -49,7 +49,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         ).flow.flowOn(dispatcher)
     }
 
-    override fun getTopRated(): Flow<PagingData<Movie>> {
+    override fun getTopRated(): Flow<PagingData<Pair<Movie, Int>>> {
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
@@ -62,7 +62,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         ).flow.flowOn(dispatcher)
     }
 
-    override fun getUpcoming(): Flow<PagingData<Movie>> {
+    override fun getUpcoming(): Flow<PagingData<Pair<Movie, Int>>> {
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
@@ -75,7 +75,7 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         ).flow.flowOn(dispatcher)
     }
 
-    override fun searchMovies(query: String): Flow<PagingData<Movie>> {
+    override fun searchMovies(query: String): Flow<PagingData<Pair<Movie, Int>>> {
         return Pager(
             config = PagingConfig(
                 pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,

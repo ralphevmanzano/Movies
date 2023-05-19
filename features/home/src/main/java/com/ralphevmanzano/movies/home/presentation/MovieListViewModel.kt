@@ -34,19 +34,19 @@ class MovieListViewModel @Inject constructor(
         }
     }
 
-    fun getNowPlaying(): Flow<PagingData<Movie>> {
+    fun getNowPlaying(): Flow<PagingData<Pair<Movie, Int>>> {
         return repository.getNowPlaying().cachedIn(viewModelScope)
     }
 
-    fun getPopular(): Flow<PagingData<Movie>> {
+    fun getPopular(): Flow<PagingData<Pair<Movie, Int>>> {
         return repository.getPopular().cachedIn(viewModelScope)
     }
 
-    fun getTopRated(): Flow<PagingData<Movie>> {
+    fun getTopRated(): Flow<PagingData<Pair<Movie, Int>>> {
         return repository.getTopRated().cachedIn(viewModelScope)
     }
 
-    fun getUpcoming(): Flow<PagingData<Movie>> {
+    fun getUpcoming(): Flow<PagingData<Pair<Movie, Int>>> {
         return repository.getUpcoming().cachedIn(viewModelScope)
     }
 }

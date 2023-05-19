@@ -64,4 +64,6 @@ data class Movie(
                 ""
             }
         }
+
+    var totalResults = 0
 }

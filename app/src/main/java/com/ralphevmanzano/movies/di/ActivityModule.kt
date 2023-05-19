@@ -8,6 +8,8 @@ import com.ralphevmanzano.movies.favourites.navigation.FavouritesNavigation
 import com.ralphevmanzano.movies.home.navigation.HomeNavigation
 import com.ralphevmanzano.movies.navigation.FavouritesNavigator
 import com.ralphevmanzano.movies.navigation.HomeNavigator
+import com.ralphevmanzano.movies.navigation.SearchNavigator
+import com.ralphevmanzano.movies.search.navigation.SearchNavigation
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -33,5 +35,8 @@ abstract class NavigatorModule {
 
     @Binds
     abstract fun favouritesNavigation(navigator: FavouritesNavigator): FavouritesNavigation
+
+    @Binds
+    abstract fun searchNavigation(navigator: SearchNavigator): SearchNavigation
     // add other navigators here
 }

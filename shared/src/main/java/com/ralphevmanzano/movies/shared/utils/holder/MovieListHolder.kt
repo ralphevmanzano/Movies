@@ -20,7 +20,8 @@ class MovieListHolder private constructor(
     private val onItemClick: (Movie) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(movie: Movie) = with(binding) {
+    fun bind(data: Pair<Movie, Int>) = with(binding) {
+        val movie = data.first
         val context = binding.root.context
         val genreText = genres.filter { it.id in movie.genreIds }.take(3).joinToString { it.name }
         val spannableTitle = SpannableStringBuilder()

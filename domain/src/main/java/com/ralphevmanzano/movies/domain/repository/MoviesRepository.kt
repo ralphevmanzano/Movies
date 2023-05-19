@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
     // Remote
-    fun getNowPlaying(): Flow<PagingData<Movie>>
-    fun getPopular(): Flow<PagingData<Movie>>
-    fun getTopRated(): Flow<PagingData<Movie>>
-    fun getUpcoming(): Flow<PagingData<Movie>>
-    fun searchMovies(query: String): Flow<PagingData<Movie>>
+    fun getNowPlaying(): Flow<PagingData<Pair<Movie, Int>>>
+    fun getPopular(): Flow<PagingData<Pair<Movie, Int>>>
+    fun getTopRated(): Flow<PagingData<Pair<Movie, Int>>>
+    fun getUpcoming(): Flow<PagingData<Pair<Movie, Int>>>
+    fun searchMovies(query: String): Flow<PagingData<Pair<Movie, Int>>>
     fun getDetails(id: Int): Flow<Result<Movie>>
     fun getGenres(): Flow<Result<Boolean>>
 

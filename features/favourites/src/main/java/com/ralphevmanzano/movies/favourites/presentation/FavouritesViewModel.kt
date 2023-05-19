@@ -23,7 +23,6 @@ class FavouritesViewModel @Inject constructor(
     private val _genres = MutableLiveData<List<Genre>>()
     val genres: LiveData<List<Genre>> = _genres
 
-
     init {
         viewModelScope.launch {
             val genres = repository.loadGenres()
