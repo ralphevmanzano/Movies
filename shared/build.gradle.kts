@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinAndroid)
+    kotlin(Plugins.kapt)
 }
 
 android {
@@ -31,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -39,4 +43,8 @@ dependencies {
     implementation(Deps.appCompat)
     implementation(Deps.material)
     implementation(Deps.constraintLayout)
+    implementation(Deps.glide)
+    kapt(Deps.glideProcessor)
+    implementation(Deps.paging)
+    implementation(Deps.pagingKtx)
 }

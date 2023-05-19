@@ -1,4 +1,4 @@
-package com.ralphevmanzano.movies.home.presentation.holder
+package com.ralphevmanzano.movies.shared.utils.holder
 
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
-import com.ralphevmanzano.movies.home.databinding.ItemMovieListBinding
 import com.ralphevmanzano.movies.shared.R
+import com.ralphevmanzano.movies.shared.databinding.ItemMovieListBinding
 
 class MovieListHolder private constructor(
     private val binding: ItemMovieListBinding,
@@ -26,7 +26,7 @@ class MovieListHolder private constructor(
         val spannableTitle = SpannableStringBuilder()
             .bold { append(movie.title) }
             .append(" ")
-            .scale(0.9f) { append(context.getString(com.ralphevmanzano.movies.shared.R.string.release_year, movie.releaseYear)) }
+            .scale(0.9f) { append(context.getString(R.string.release_year, movie.releaseYear)) }
 
         titleTextView.text = spannableTitle
         genreTextView.text = genreText

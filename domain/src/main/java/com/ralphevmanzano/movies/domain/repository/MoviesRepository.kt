@@ -12,6 +12,7 @@ interface MoviesRepository {
     fun getPopular(): Flow<PagingData<Movie>>
     fun getTopRated(): Flow<PagingData<Movie>>
     fun getUpcoming(): Flow<PagingData<Movie>>
+    fun searchMovies(query: String): Flow<PagingData<Movie>>
     fun getDetails(id: Int): Flow<Result<Movie>>
     fun getGenres(): Flow<Result<Boolean>>
 

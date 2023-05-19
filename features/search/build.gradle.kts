@@ -37,10 +37,16 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.shared))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.data))
+
     implementation(Deps.androidxCore)
     implementation(Deps.appCompat)
     implementation(Deps.material)
     implementation(Deps.constraintLayout)
+    implementation(Deps.coroutinesAndroid)
+    implementation(Deps.coroutinesCore)
 
     // navigation
     implementation(Deps.navigationFragment)
@@ -49,4 +55,8 @@ dependencies {
     // hilt
     implementation(Deps.hilt)
     kapt(Deps.hiltCompiler)
+
+    // paging
+    implementation(Deps.paging)
+    implementation(Deps.pagingKtx)
 }

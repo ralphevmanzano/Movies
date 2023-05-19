@@ -45,6 +45,8 @@ dependencies {
     implementation(Deps.appCompat)
     implementation(Deps.material)
     implementation(Deps.constraintLayout)
+    implementation(Deps.coroutinesAndroid)
+    implementation(Deps.coroutinesCore)
 
     // navigation
     implementation(Deps.navigationFragment)

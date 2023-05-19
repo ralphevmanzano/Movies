@@ -4,7 +4,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ralphevmanzano.movies.R
+import com.ralphevmanzano.movies.favourites.navigation.FavouritesNavigation
 import com.ralphevmanzano.movies.home.navigation.HomeNavigation
+import com.ralphevmanzano.movies.navigation.FavouritesNavigator
 import com.ralphevmanzano.movies.navigation.HomeNavigator
 import dagger.Binds
 import dagger.Module
@@ -28,5 +30,8 @@ abstract class NavigatorModule {
 
     @Binds
     abstract fun homeNavigation(navigator: HomeNavigator): HomeNavigation
+
+    @Binds
+    abstract fun favouritesNavigation(navigator: FavouritesNavigator): FavouritesNavigation
     // add other navigators here
 }

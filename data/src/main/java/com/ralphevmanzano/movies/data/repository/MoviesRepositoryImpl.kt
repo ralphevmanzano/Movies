@@ -1,5 +1,6 @@
 package com.ralphevmanzano.movies.data.repository
 
+import androidx.paging.PagingData
 import com.ralphevmanzano.movies.domain.datasource.MoviesLocalDataSource
 import com.ralphevmanzano.movies.domain.datasource.MoviesRemoteDataSource
 import com.ralphevmanzano.movies.domain.model.Genre
@@ -24,6 +25,7 @@ class MoviesRepositoryImpl @Inject constructor(
     override fun getTopRated() = remote.getTopRated()
 
     override fun getUpcoming() = remote.getUpcoming()
+    override fun searchMovies(query: String) = remote.searchMovies(query)
 
     override fun getDetails(id: Int) = remote.getDetails(id)
     override fun getGenres(): Flow<Result<Boolean>> {
@@ -49,7 +51,7 @@ class MoviesRepositoryImpl @Inject constructor(
     override fun loadFavourites() = local.loadFavourites()
 
     override suspend fun addFavourite(movie: Movie) {
-        local.addFavourite(movie)
+        local.addFavourite(movie.copy(genreIds = movie.genres.map { it.id }))
     }
 
     override suspend fun removeFavourite(id: Int) {

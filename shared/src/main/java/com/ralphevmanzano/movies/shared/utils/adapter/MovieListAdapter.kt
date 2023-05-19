@@ -1,4 +1,4 @@
-package com.ralphevmanzano.movies.home.presentation.adapter
+package com.ralphevmanzano.movies.shared.utils.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
 import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
-import com.ralphevmanzano.movies.home.presentation.holder.MovieListHolder
+import com.ralphevmanzano.movies.shared.utils.holder.MovieListHolder
 
 class MovieListAdapter(
     private val glide: RequestManager,

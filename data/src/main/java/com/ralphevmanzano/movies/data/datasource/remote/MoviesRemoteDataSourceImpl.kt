@@ -75,6 +75,19 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         ).flow.flowOn(dispatcher)
     }
 
+    override fun searchMovies(query: String): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = MoviesPagingSource.NETWORK_PAGE_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = 2
+            ),
+            pagingSourceFactory = {
+                MoviesPagingSource(service, null, query)
+            }
+        ).flow.flowOn(dispatcher)
+    }
+
     override fun getDetails(id: Int): Flow<Result<Movie>> {
         return flow {
             emit(Result.loading())

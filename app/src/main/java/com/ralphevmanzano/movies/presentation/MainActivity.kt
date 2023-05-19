@@ -1,20 +1,20 @@
 package com.ralphevmanzano.movies.presentation
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.core.view.isVisible
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ralphevmanzano.movies.NavGraphDirections
 import com.ralphevmanzano.movies.R
 import com.ralphevmanzano.movies.databinding.ActivityMainBinding
-import com.ralphevmanzano.movies.databinding.ContentMainBinding
-import com.ralphevmanzano.movies.details.R.id.*
-import com.ralphevmanzano.movies.search.R.id.*
+import com.ralphevmanzano.movies.details.R.id.fragment_details
+import com.ralphevmanzano.movies.home.R.id.fragment_home
+import com.ralphevmanzano.movies.search.R.id.fragment_search
 import com.ralphevmanzano.movies.shared.utils.hide
 import com.ralphevmanzano.movies.shared.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private var toolbarMenu: Menu? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
@@ -32,11 +34,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val navView: BottomNavigationView = binding.content.bottomNavView
+        navView.setupWithNavController(navController)
+
+        val menuSearch = binding.toolbar.menu.findItem(R.id.menu_search)
+
+        menuSearch.setOnMenuItemClickListener {
+            navController.navigate(NavGraphDirections.actionToSearch())
+            true
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -45,22 +53,17 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.hide()
                 }
                 else -> {
+                    if (destination.id == fragment_home) {
+                        binding.toolbar.title = getString(R.string.movies)
+                        menuSearch.isVisible = true
+                    } else {
+                        binding.toolbar.title = getString(R.string.favourites)
+                        menuSearch.isVisible = false
+                    }
                     binding.content.bottomNavView.show()
                     binding.toolbar.show()
                 }
             }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_search -> true
-            else -> super.onOptionsItemSelected(item)
         }
     }
 

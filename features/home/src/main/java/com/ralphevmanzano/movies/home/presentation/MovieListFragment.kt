@@ -13,8 +13,8 @@ import com.ralphevmanzano.movies.domain.model.Genre
 import com.ralphevmanzano.movies.domain.model.Movie
 import com.ralphevmanzano.movies.home.databinding.FragmentMovieListBinding
 import com.ralphevmanzano.movies.home.navigation.HomeNavigation
-import com.ralphevmanzano.movies.home.presentation.adapter.MovieListAdapter
-import com.ralphevmanzano.movies.home.presentation.adapter.MovieListLoadingStateAdapter
+import com.ralphevmanzano.movies.shared.utils.adapter.MovieListAdapter
+import com.ralphevmanzano.movies.shared.utils.adapter.MovieListLoadingStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -43,11 +43,7 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupUI()
         setupObservers()
-    }
-
-    private fun setupUI() = with(binding) {
     }
 
     private fun setupObservers() {

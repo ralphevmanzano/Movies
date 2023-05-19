@@ -58,7 +58,8 @@ dependencies {
     debugImplementation(Deps.chucker)
     releaseImplementation(Deps.chuckerNoOp)
 
-    implementation(Deps.coroutines)
+    implementation(Deps.coroutinesAndroid)
+    implementation(Deps.coroutinesCore)
     implementation(Deps.kotlinxSerialization)
     implementation(Deps.timber)
 }

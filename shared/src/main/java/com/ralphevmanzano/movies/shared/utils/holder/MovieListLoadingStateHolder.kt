@@ -1,9 +1,9 @@
-package com.ralphevmanzano.movies.home.presentation.holder
+package com.ralphevmanzano.movies.shared.utils.holder
 
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.ralphevmanzano.movies.home.databinding.ItemLoadingStateBinding
+import com.ralphevmanzano.movies.shared.databinding.ItemLoadingStateBinding
 
 class MovieListLoadingStateHolder(
     private val binding: ItemLoadingStateBinding,

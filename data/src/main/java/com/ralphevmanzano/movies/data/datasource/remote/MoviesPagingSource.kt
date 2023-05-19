@@ -9,7 +9,11 @@ import com.skydoves.sandwich.messageOrNull
 import retrofit2.HttpException
 import java.io.IOException
 
-class MoviesPagingSource(private val service: MovieService, private val type: Movie.Type) :
+class MoviesPagingSource(
+    private val service: MovieService,
+    private val type: Movie.Type?,
+    private val query: String = ""
+) :
     PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
@@ -20,9 +24,14 @@ class MoviesPagingSource(private val service: MovieService, private val type: Mo
                 Movie.Type.POPULAR -> service.getPopular(pageIndex)
                 Movie.Type.TOP_RATED -> service.getTopRated(pageIndex)
                 Movie.Type.UPCOMING -> service.getUpcoming(pageIndex)
+                else -> service.searchMovies(query, pageIndex)
             }
             val movies = response.getOrThrow().results
-            val nextKey = if (movies.isEmpty()) { null } else { pageIndex + 1 }
+            val nextKey = if (movies.isEmpty()) {
+                null
+            } else {
+                pageIndex + 1
+            }
 
             LoadResult.Page(
                 data = movies,

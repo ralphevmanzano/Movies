@@ -1,11 +1,11 @@
-package com.ralphevmanzano.movies.home.presentation.adapter
+package com.ralphevmanzano.movies.shared.utils.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.ralphevmanzano.movies.home.databinding.ItemLoadingStateBinding
-import com.ralphevmanzano.movies.home.presentation.holder.MovieListLoadingStateHolder
+import com.ralphevmanzano.movies.shared.databinding.ItemLoadingStateBinding
+import com.ralphevmanzano.movies.shared.utils.holder.MovieListLoadingStateHolder
 
 class MovieListLoadingStateAdapter(private val adapter: MovieListAdapter) :
     LoadStateAdapter<MovieListLoadingStateHolder>() {

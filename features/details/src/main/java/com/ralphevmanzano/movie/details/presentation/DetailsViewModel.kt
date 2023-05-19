@@ -9,6 +9,7 @@ import com.ralphevmanzano.movies.domain.model.utils.Result
 import com.ralphevmanzano.movies.domain.repository.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
