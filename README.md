@@ -1,5 +1,5 @@
 # Movies
-A simple app showcasing TMDB Api while using modern Android development technologies.
+A simple app using TMDB Api while showcasing modern Android development technologies.
 <p align="center">
   <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/b149dbc9-1677-45c7-a33e-e2addc75443b" width="220" />
   <img src="https://github.com/ralphevmanzano/Movies/assets/18175202/d365b253-04a3-4474-8e88-48ad7a1cb9b3" width="220" /> 
